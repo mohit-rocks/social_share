@@ -1,35 +1,31 @@
-<!DOCTYPE html>
-<html lang="{{ config('app.locale') }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layout')
 
-        <title>Laravel</title>
-
-        
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
-                    @endif
-                </div>
-            @endif
-
-            <div class="content">
-                <h3>Task listing</h3>
-                <ul>
-                    @foreach($tasks as $task)
-                        <li><a href="/tasks/{{$task->id}}">{{ $task->body }}</a></li>
-                    @endforeach
-                </ul>
-            </div>
+@section('content')
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">Album example</h1>
+            <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
+            <p>
+                <a href="#" class="btn btn-primary">Main call to action</a>
+                <a href="#" class="btn btn-secondary">Secondary action</a>
+            </p>
         </div>
-    </body>
-</html>
+    </section>
+
+    <div class="album text-muted">
+        <div class="container">
+
+            <div class="row">
+                @foreach($tasks as $task)
+                    <div class="card">
+                        <img data-src="holder.js/100px280/thumb" alt="Card image cap">
+                        <p class="card-text"><li><a href="/tasks/{{$task->id}}">{{ $task->body }}</a></li></p>
+                    </div>
+                @endforeach
+
+            </div>
+
+        </div>
+    </div>
+
+@endsection

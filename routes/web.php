@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'tasksController@index');
 
 Route::get('about', function () {
 	$tasks = DB::table('tasks')->get();

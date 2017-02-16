@@ -11,10 +11,10 @@
     <title>Album example for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="album.css" rel="stylesheet">
+    <link href="/css/album.css" rel="stylesheet">
 </head>
 
 <body>
@@ -37,79 +37,17 @@
         </div>
     </div>
 </div>
-<div class="navbar navbar-inverse bg-inverse">
-    <div class="container d-flex justify-content-between">
-        <a href="#" class="navbar-brand">Album</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-</div>
+@include('layouts.nav')
 
-<section class="jumbotron text-center">
-    <div class="container">
-        <h1 class="jumbotron-heading">Album example</h1>
-        <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
-        <p>
-            <a href="#" class="btn btn-primary">Main call to action</a>
-            <a href="#" class="btn btn-secondary">Secondary action</a>
-        </p>
-    </div>
-</section>
-
-<div class="album text-muted">
-    <div class="container">
-
-        <div class="row">
-            <div class="card">
-                <img data-src="holder.js/100px280/thumb" alt="Card image cap">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-            <div class="card">
-                <img data-src="holder.js/100px280/thumb" alt="Card image cap">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-            <div class="card">
-                <img data-src="holder.js/100px280/thumb" alt="Card image cap">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-
-            <div class="card">
-                <img data-src="holder.js/100px280/thumb" alt="Card image cap">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-            <div class="card">
-                <img data-src="holder.js/100px280/thumb" alt="Card image cap">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-            <div class="card">
-                <img data-src="holder.js/100px280/thumb" alt="Card image cap">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-
-            <div class="card">
-                <img data-src="holder.js/100px280/thumb" alt="Card image cap">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-            <div class="card">
-                <img data-src="holder.js/100px280/thumb" alt="Card image cap">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-            <div class="card">
-                <img data-src="holder.js/100px280/thumb" alt="Card image cap">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-        </div>
-
-    </div>
-</div>
-
+@yield('content')
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+
+@include('layouts.footer')
 
 </body>
 </html>
