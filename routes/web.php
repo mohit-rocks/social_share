@@ -19,10 +19,20 @@ Route::get('about', function () {
 });
 
 Route::get('tasks', 'tasksController@index');
+Route::get('tasks/create', 'TasksController@create');
 Route::get('tasks/{task}', 'tasksController@show');
+Route::post('tasks', 'TasksController@store');
 
 Route::get('facebook-posts', 'FacebookPostController@index');
+Route::get('facebook-posts/create', 'FacebookPostController@create');
 Route::get('facebook-posts/{post}', 'FacebookPostController@show');
+Route::post('facebook-posts', 'FacebookPostController@store');
 
 Route::get('twitter-posts', 'TwitterPostController@index');
+Route::get('twitter-posts/create', 'TwitterPostController@create');
 Route::get('twitter-posts/{post}', 'TwitterPostController@show');
+Route::post('twitter-posts', 'TwitterPostController@store');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
