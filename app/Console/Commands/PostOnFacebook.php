@@ -39,7 +39,7 @@ class PostOnFacebook extends Command
     public function handle()
     {
       $posts = FacebookPost::query()->where('completed', 0)
-        ->where('published_date', '>=', Carbon::now())
-        ->where('published_date', '<', Carbon::now()->addMinutes(5)->toDateTimeString());
+        ->where('published_date', '>', Carbon::now())
+        ->where('published_date', '<=', Carbon::now()->addMinutes(5))->get();
     }
 }
