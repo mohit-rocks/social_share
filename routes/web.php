@@ -36,3 +36,6 @@ Route::post('twitter-posts', 'TwitterPostController@store');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::get('/redirect/{provider}', 'SocialAuthController@redirect');
+Route::get('/callback/{provider}', 'SocialAuthController@callback');

@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\FacebookPost;
+use Illuminate\Support\Facades\Auth;
+use Socialite;
 
 class FacebookPostController extends Controller
 {
+    public function __construct()
+    {
+      $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,6 +21,7 @@ class FacebookPostController extends Controller
     public function index()
     {
       $posts = FacebookPost::orderby('created_at', 'desc')->get();
+
       return view('facebookposts.index', compact('posts'));
     }
 

@@ -34,5 +34,15 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+    'facebook' => [
+      'client_id' => '1090271074415490',
+      'client_secret' => 'cfef30abf00fa4ce766a47a7d926b6c5',
+      'redirect' => 'http://blog.dev/callback/facebook',
+    ],
+    'twitter' => [
+      'client_id' => 'IvktlPQx5FaELkjpQfO1V1PpQ',
+      'client_secret' => 'BbRwvGReuI0t6Bm7gZmU922S8lv4Mte4ihKzLyJdSmu93bBiaV',
+      'redirect' => 'http://blog.dev/callback/twitter',
+    ],
 
 ];
