@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\FacebookPost;
+use Facebook;
 
 class PostOnFacebook extends Command
 {
@@ -41,5 +42,38 @@ class PostOnFacebook extends Command
       $posts = FacebookPost::query()->where('completed', 0)
         ->where('published_date', '>', Carbon::now())
         ->where('published_date', '<=', Carbon::now()->addMinutes(5))->get();
+
+      $fb = new Facebook\Facebook([
+        'app_id' => env('FACEBOOK_APP_ID'),
+        'app_secret' => env('FACEBOOK_APP_SECRET'),
+        'default_graph_version' => 'v2.2',
+      ]);
+
+      if(\Auth::check()) {
+        $userId = \Auth::user()->id;
+      }
+      $socialAccountUser = SocialAccount::whereUserId($userId)
+        ->first();
+
+      foreach ($posts as $post) {
+        $linkData = [
+          'link' => 'http://www.mohitaghera.in',
+          'message' => $post->body,
+        ];
+
+        try {
+          // Returns a `Facebook\FacebookResponse` object
+          $response = $fb->post('/me/feed', $linkData, $socialAccountUser->token);
+        } catch(Facebook\Exceptions\FacebookResponseException $e) {
+          echo 'Graph returned an error: ' . $e->getMessage();
+          exit;
+        } catch(Facebook\Exceptions\FacebookSDKException $e) {
+          echo 'Facebook SDK returned an error: ' . $e->getMessage();
+          exit;
+        }
+        $graphNode = $response->getGraphNode();
+        echo 'Posted with id: ' . $graphNode['id'];
+      }
+
     }
 }
