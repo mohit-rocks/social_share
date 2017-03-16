@@ -15,7 +15,7 @@
             <div class="form-group row">
                 <label for="example-datetime-local-input" class="col-2 col-form-label">Published Date</label>
                 <div class="col-10">
-                    <input class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="published_date" name="published_date" required>
+                    <input class="form-control" type="datetime-local" value="2017-03-16T13:45:00" id="published_date" name="published_date" required>
                 </div>
             </div>
 

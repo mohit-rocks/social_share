@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         'App\Console\Commands\PostOnFacebook',
+        'App\Console\Commands\PostOnTwitter',
     ];
 
     /**
@@ -26,6 +27,9 @@ class Kernel extends ConsoleKernel
     {
       // Schedule post to facebook command.
       $schedule->command('post:facebook')->everyFiveMinutes();
+
+      // Schedule post to twitter command.
+      $schedule->command('post:twitter')->everyFiveMinutes();
     }
 
     /**

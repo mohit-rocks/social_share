@@ -5,6 +5,10 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\FacebookPost;
 use Facebook;
+use Socialite;
+use App\SocialAccount;
+use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 class PostOnFacebook extends Command
 {
@@ -52,6 +56,9 @@ class PostOnFacebook extends Command
       if(\Auth::check()) {
         $userId = \Auth::user()->id;
       }
+      else {
+        $userId = 1;
+      }
       $socialAccountUser = SocialAccount::whereUserId($userId)
         ->first();
 
@@ -64,6 +71,13 @@ class PostOnFacebook extends Command
         try {
           // Returns a `Facebook\FacebookResponse` object
           $response = $fb->post('/me/feed', $linkData, $socialAccountUser->token);
+
+          // Set completed to 1 so it should not be posted again.
+          FacebookPost::where('id', $post->id)->update(array('completed' => 1));
+
+          $graphNode = $response->getGraphNode();
+          Log::info('Published facebook post for user: ' . $userId . ' Posted with id:' . $graphNode['id']);
+
         } catch(Facebook\Exceptions\FacebookResponseException $e) {
           echo 'Graph returned an error: ' . $e->getMessage();
           exit;
@@ -71,9 +85,6 @@ class PostOnFacebook extends Command
           echo 'Facebook SDK returned an error: ' . $e->getMessage();
           exit;
         }
-        $graphNode = $response->getGraphNode();
-        echo 'Posted with id: ' . $graphNode['id'];
       }
-
     }
 }

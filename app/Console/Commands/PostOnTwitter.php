@@ -4,6 +4,9 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\TwitterPost;
+use Twitter;
+use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 class PostOnTwitter extends Command
 {
@@ -19,7 +22,7 @@ class PostOnTwitter extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'This command allows to post tweets on user\'s twitter profile.';
 
     /**
      * Create a new command instance.
@@ -38,6 +41,28 @@ class PostOnTwitter extends Command
      */
     public function handle()
     {
-        //
+      $posts = TwitterPost::query()->where('completed', 0)
+        ->where('published_date', '>', Carbon::now())
+        ->where('published_date', '<=', Carbon::now()->addMinutes(5))->get();
+
+      foreach ($posts as $post) {
+        try {
+          if(\Auth::check()) {
+            $userId = \Auth::user()->id;
+          }
+          else {
+            $userId = 1;
+          }
+
+          $tweet = Twitter::postTweet(['status' => $post->body, 'format' => 'json']);
+
+          // Set completed to 1 so it should not be posted again.
+          TwitterPost::where('id', $post->id)->update(array('completed' => 1));
+
+          Log::info('Published facebook post for user: ' . $userId . ' Posted with id:' . $tweet->id);
+        } catch (\Exception $e) {
+          Log::info('Something went wrong in twitter auto post.');
+        }
+      }
     }
 }

@@ -10,6 +10,7 @@ use Socialite;
 use Facebook;
 use Facebook\FacebookRequest;
 use App;
+use Twitter;
 
 class FacebookPostController extends Controller
 {
@@ -25,39 +26,6 @@ class FacebookPostController extends Controller
     public function index()
     {
       $posts = FacebookPost::orderby('created_at', 'desc')->get();
-
-      /*$fb = new Facebook\Facebook([
-        'app_id' => env('FACEBOOK_APP_ID'),
-        'app_secret' => env('FACEBOOK_APP_SECRET'),
-        'default_graph_version' => 'v2.2',
-      ]);
-
-      if(\Auth::check()) {
-        $userId = \Auth::user()->id;
-      }
-      $socialAccountUser = SocialAccount::whereUserId($userId)
-        ->first();
-
-      $linkData = [
-        'link' => 'http://www.mohitaghera.in',
-        'message' => 'Hello World !!',
-      ];
-
-      try {
-        // Returns a `Facebook\FacebookResponse` object
-        $response = $fb->post('/me/feed', $linkData, $socialAccountUser->token);
-      } catch(Facebook\Exceptions\FacebookResponseException $e) {
-        echo 'Graph returned an error: ' . $e->getMessage();
-        exit;
-      } catch(Facebook\Exceptions\FacebookSDKException $e) {
-        echo 'Facebook SDK returned an error: ' . $e->getMessage();
-        exit;
-      }
-
-      $graphNode = $response->getGraphNode();
-
-      echo 'Posted with id: ' . $graphNode['id'];*/
-
 
       return view('facebookposts.index', compact('posts'));
     }
