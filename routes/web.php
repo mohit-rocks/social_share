@@ -27,6 +27,8 @@ Route::get('facebook-posts', 'FacebookPostController@index');
 Route::get('facebook-posts/create', 'FacebookPostController@create');
 Route::get('facebook-posts/{post}', 'FacebookPostController@show');
 Route::post('facebook-posts', 'FacebookPostController@store');
+Route::get('facebook-posts/{post}/edit', 'FacebookPostController@edit');
+Route::post('facebook-posts/update', 'FacebookPostController@update');
 
 Route::get('twitter-posts', 'TwitterPostController@index');
 Route::get('twitter-posts/create', 'TwitterPostController@create');

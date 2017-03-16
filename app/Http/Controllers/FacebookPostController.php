@@ -82,7 +82,8 @@ class FacebookPostController extends Controller
      */
     public function edit($id)
     {
-        //
+      $post = FacebookPost::find($id);
+      return view('facebookposts.edit', compact('post'));
     }
 
     /**
@@ -94,7 +95,17 @@ class FacebookPostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $this->validate(request(), [
+        'body' => 'required',
+        'published_date' => 'required|after:now',
+
+      ]);
+
+      FacebookPost::find($id)->update([
+        'body' => request('body'),
+        'published_date' => request('published_date'),
+      ]);
+      return (redirect('/facebook-posts'));
     }
 
     /**
