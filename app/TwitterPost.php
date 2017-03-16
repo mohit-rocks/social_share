@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class TwitterPost extends Model
 {
-  protected $fillable = ['body', 'published_date'];
+  protected $fillable = ['body', 'published_date', 'uid'];
 }

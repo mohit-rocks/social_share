@@ -42,10 +42,17 @@ class TwitterPostController extends Controller
 
       ]);
 
+      if(\Auth::check()) {
+        $userId = \Auth::user()->id;
+      }
+      else {
+        $userId = 1;
+      }
+
       TwitterPost::create([
         'body' => request('body'),
         'published_date' => request('published_date'),
-
+        'uid' => $userId,
       ]);
       return(redirect('/twitter-posts'));
     }

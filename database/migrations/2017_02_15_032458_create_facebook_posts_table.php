@@ -18,6 +18,7 @@ class CreateFacebookPostsTable extends Migration
             $table->text('body');
             $table->boolean('completed')->default(false);
             $table->dateTime('published_date');
+            $table->integer('uid');
             $table->timestamps();
         });
     }

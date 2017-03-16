@@ -6,6 +6,7 @@ use GuzzleHttp\Psr7\Request;
 use Laravel\Socialite\Contracts\User as ProviderUser;
 
 use Laravel\Socialite\Contracts\Provider as Provider;
+use Illuminate\Support\Facades\Hash;
 
 class SocialAccountService
 {
@@ -32,6 +33,9 @@ class SocialAccountService
         $user = User::create([
           'email' => $providerUser->getEmail(),
           'name' => $providerUser->getName(),
+
+          // Setting default password to prevent error of missing password.
+          'password' => Hash::make($providerUser->getName()),
         ]);
       }
 

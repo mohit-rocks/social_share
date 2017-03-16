@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\SocialAccount;
 use Illuminate\Http\Request;
 use App\FacebookPost;
-use Illuminate\Support\Facades\Auth;
 use Socialite;
-use Facebook;
-use Facebook\FacebookRequest;
 use App;
 use Twitter;
 
@@ -53,10 +49,16 @@ class FacebookPostController extends Controller
         'published_date' => 'required|after:now',
 
       ]);
+      if(\Auth::check()) {
+        $userId = \Auth::user()->id;
+      }
+      else {
+        $userId = 1;
+      }
       FacebookPost::create([
         'body' => request('body'),
         'published_date' => request('published_date'),
-
+        'uid' => $userId,
       ]);
       return(redirect('/facebook-posts'));
     }

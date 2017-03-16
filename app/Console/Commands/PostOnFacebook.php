@@ -53,16 +53,9 @@ class PostOnFacebook extends Command
         'default_graph_version' => 'v2.2',
       ]);
 
-      if(\Auth::check()) {
-        $userId = \Auth::user()->id;
-      }
-      else {
-        $userId = 1;
-      }
-      $socialAccountUser = SocialAccount::whereUserId($userId)
-        ->first();
-
       foreach ($posts as $post) {
+        $socialAccountUser = SocialAccount::whereUserId($post->uid)
+          ->first();
         $linkData = [
           'link' => 'http://www.mohitaghera.in',
           'message' => $post->body,
@@ -76,7 +69,7 @@ class PostOnFacebook extends Command
           FacebookPost::where('id', $post->id)->update(array('completed' => 1));
 
           $graphNode = $response->getGraphNode();
-          Log::info('Published facebook post for user: ' . $userId . ' Posted with id:' . $graphNode['id']);
+          Log::info('Published facebook post for user: ' . $post->uid . ' Posted with id:' . $graphNode['id']);
 
         } catch(Facebook\Exceptions\FacebookResponseException $e) {
           echo 'Graph returned an error: ' . $e->getMessage();

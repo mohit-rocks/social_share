@@ -47,19 +47,13 @@ class PostOnTwitter extends Command
 
       foreach ($posts as $post) {
         try {
-          if(\Auth::check()) {
-            $userId = \Auth::user()->id;
-          }
-          else {
-            $userId = 1;
-          }
 
           $tweet = Twitter::postTweet(['status' => $post->body, 'format' => 'json']);
 
           // Set completed to 1 so it should not be posted again.
           TwitterPost::where('id', $post->id)->update(array('completed' => 1));
 
-          Log::info('Published facebook post for user: ' . $userId . ' Posted with id:' . $tweet->id);
+          Log::info('Published facebook post for user: ' . $post->uid . ' Posted with id:' . $tweet->id);
         } catch (\Exception $e) {
           Log::info('Something went wrong in twitter auto post.');
         }

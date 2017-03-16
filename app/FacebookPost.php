@@ -7,7 +7,7 @@ use Carbon\Carbon;
 
 class FacebookPost extends Model
 {
-  protected $fillable = ['body', 'published_date'];
+  protected $fillable = ['body', 'published_date', 'uid'];
 
   public function scopeActivityOlderThan($query, $interval) {
     $query->where('published_date', '>=', Carbon::now());
