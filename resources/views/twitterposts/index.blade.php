@@ -3,7 +3,7 @@
 @section('content')
     <div class="col-sm-8 blog-main">
         <ul class="panel-post-navigation">
-            <li><a href="{{ URL::to('twitter-posts/create') }}">Create Facebook Posts</a></li>
+            <li><a href="{{ URL::to('twitter-posts/create') }}">Create Twitter Posts</a></li>
         </ul>
     </div>
     <div class="col-sm-8 blog-main">
