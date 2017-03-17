@@ -23,17 +23,8 @@ Route::get('tasks/create', 'TasksController@create');
 Route::get('tasks/{task}', 'tasksController@show');
 Route::post('tasks', 'TasksController@store');
 
-Route::get('facebook-posts', 'FacebookPostController@index');
-Route::get('facebook-posts/create', 'FacebookPostController@create');
-Route::get('facebook-posts/{post}', 'FacebookPostController@show');
-Route::post('facebook-posts', 'FacebookPostController@store');
-Route::get('facebook-posts/{post}/edit', 'FacebookPostController@edit');
-Route::post('facebook-posts/update', 'FacebookPostController@update');
-
-Route::get('twitter-posts', 'TwitterPostController@index');
-Route::get('twitter-posts/create', 'TwitterPostController@create');
-Route::get('twitter-posts/{post}', 'TwitterPostController@show');
-Route::post('twitter-posts', 'TwitterPostController@store');
+Route::resource('facebook-posts', 'FacebookPostController');
+Route::resource('twitter-posts', 'TwitterPostController');
 
 Auth::routes();
 

@@ -7,6 +7,9 @@ use App\FacebookPost;
 use Socialite;
 use App;
 use Twitter;
+use Illuminate\Support\Facades\Input;
+use Session;
+use Redirect;
 
 class FacebookPostController extends Controller
 {
@@ -69,8 +72,9 @@ class FacebookPostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(FacebookPost $post)
+    public function show($id)
     {
+      $post = FacebookPost::find($id);
       return view('facebookposts.show', compact('post'));
     }
 
@@ -93,7 +97,7 @@ class FacebookPostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
       $this->validate(request(), [
         'body' => 'required',
@@ -102,8 +106,8 @@ class FacebookPostController extends Controller
       ]);
 
       FacebookPost::find($id)->update([
-        'body' => request('body'),
-        'published_date' => request('published_date'),
+        'body' => Input::get('body'),
+        'published_date' => Input::get('published_date'),
       ]);
       return (redirect('/facebook-posts'));
     }
@@ -116,6 +120,11 @@ class FacebookPostController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $post = FacebookPost::find($id);
+      $post->delete();
+
+      // redirect
+      Session::flash('message', 'Successfully deleted the post!');
+      return Redirect::to('facebook-posts');
     }
 }

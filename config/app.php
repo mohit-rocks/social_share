@@ -179,6 +179,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider::class,
         Thujohn\Twitter\TwitterServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
 
     ],
 
@@ -231,6 +232,9 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Facebook' => SammyK\LaravelFacebookSdk\FacebookFacade::class,
         'Twitter' => Thujohn\Twitter\Facades\Twitter::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
+        'Input' => Illuminate\Support\Facades\Input::class,
 
     ],
 

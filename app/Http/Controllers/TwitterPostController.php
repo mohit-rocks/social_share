@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\TwitterPost;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Session;
+use Redirect;
 
 class TwitterPostController extends Controller
 {
@@ -63,8 +66,9 @@ class TwitterPostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(TwitterPost $post)
+    public function show($id)
     {
+      $post = TwitterPost::find($id);
       return view('twitterposts.show', compact('post'));
     }
 
@@ -76,7 +80,8 @@ class TwitterPostController extends Controller
      */
     public function edit($id)
     {
-        //
+      $post = TwitterPost::find($id);
+      return view('twitterposts.edit', compact('post'));
     }
 
     /**
@@ -86,9 +91,19 @@ class TwitterPostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
-        //
+      $this->validate(request(), [
+        'body' => 'required',
+        'published_date' => 'required|after:now',
+
+      ]);
+
+      TwitterPost::find($id)->update([
+        'body' => Input::get('body'),
+        'published_date' => Input::get('published_date'),
+      ]);
+      return (redirect('/twitter-posts'));
     }
 
     /**
@@ -99,6 +114,11 @@ class TwitterPostController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $post = TwitterPost::find($id);
+      $post->delete();
+
+      // redirect
+      Session::flash('message', 'Successfully deleted the post!');
+      return Redirect::to('twitter-posts');
     }
 }

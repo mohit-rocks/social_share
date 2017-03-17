@@ -2,23 +2,23 @@
 
 @section('content')
     <div class="col-sm-8 blog-main">
-        <h1>Create a Twitter Post</h1>
+        <h1>Edit Twitter Post</h1>
 
         @include('layouts.error')
 
-        {!! Form::open(['url' => 'twitter-posts']) !!}
+        {{ Form::model($post, array('route' => array('twitter-posts.update', $post->id), 'method' => 'PUT')) }}
         {!! Form::token() !!}
         <div class="form-group">
             {{ Form::label('Body', null, ['class' => 'col-2 col-form-label']) }}
-            {{ Form::textarea('body', null, ['class' => 'col-10 form-control']) }}
+            {{ Form::textarea('body', $post->body, ['class' => 'col-10 form-control']) }}
         </div>
 
         <div class="form-group row">
             {{ Form::label('Published Date', null, ['class' => 'col-2 col-form-label']) }}
-            {{ Form::datetimeLocal('published_date', \Carbon\Carbon::now(), ['class' => 'col-10 form-control']) }}
+            {{ Form::datetimeLocal('published_date', new \Carbon\Carbon($post->published_date), ['class' => 'col-10 form-control']) }}
         </div>
 
-        <button type="submit" class="btn btn-primary">Save</button>
+        {{ Form::submit('Update', ['class' => 'btn btn-primary']) }}
         {!! Form::close() !!}
 
     </div>
