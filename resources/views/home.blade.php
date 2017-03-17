@@ -9,6 +9,11 @@
 
                 <div class="panel-body">
                     You are logged in!
+
+                    <ul class="panel-post-navigation">
+                        <li><a href="{{ URL::to('facebook-posts/') }}">Facebook Posts</a></li>
+                        <li><a href="{{ URL::to('twitter-posts/') }}">Twitter Posts</a></li>
+                    </ul>
                 </div>
             </div>
         </div>

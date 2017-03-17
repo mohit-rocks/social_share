@@ -10,6 +10,19 @@ use Redirect;
 
 class TwitterPostController extends Controller
 {
+    protected $uid;
+
+    public function __construct()
+    {
+      $this->middleware('auth');
+
+      if(\Auth::check()) {
+        $this->uid = \Auth::user()->id;
+      }
+      else {
+        $this->uid = 1;
+      }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +30,7 @@ class TwitterPostController extends Controller
      */
     public function index()
     {
-      $posts = TwitterPost::all();
+      $posts = TwitterPost::where('uid', '=', $this->uid)->get();
       return view('twitterposts.index', compact('posts'));
     }
 
@@ -45,17 +58,10 @@ class TwitterPostController extends Controller
 
       ]);
 
-      if(\Auth::check()) {
-        $userId = \Auth::user()->id;
-      }
-      else {
-        $userId = 1;
-      }
-
       TwitterPost::create([
         'body' => request('body'),
         'published_date' => request('published_date'),
-        'uid' => $userId,
+        'uid' => $this->uid,
       ]);
       return(redirect('/twitter-posts'));
     }

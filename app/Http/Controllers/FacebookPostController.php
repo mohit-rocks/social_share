@@ -13,9 +13,18 @@ use Redirect;
 
 class FacebookPostController extends Controller
 {
+    protected $uid;
+
     public function __construct()
     {
       $this->middleware('auth');
+
+      if(\Auth::check()) {
+        $this->uid = \Auth::user()->id;
+      }
+      else {
+        $this->uid = 1;
+      }
     }
     /**
      * Display a listing of the resource.
@@ -24,7 +33,8 @@ class FacebookPostController extends Controller
      */
     public function index()
     {
-      $posts = FacebookPost::orderby('created_at', 'desc')->get();
+      $posts = FacebookPost::orderby('created_at', 'desc')
+        ->where('uid', '=', $this->uid)->get();
 
       return view('facebookposts.index', compact('posts'));
     }
