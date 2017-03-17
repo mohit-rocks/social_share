@@ -2,6 +2,11 @@
 
 @section('content')
     <div class="col-sm-8 blog-main">
+        <ul class="panel-post-navigation">
+            <li><a href="{{ URL::to('twitter-posts/create') }}">Create Facebook Posts</a></li>
+        </ul>
+    </div>
+    <div class="col-sm-8 blog-main">
         @foreach($posts as $post)
             <div class="blog-post">
                 <h2 class="blog-post-title"><a href="/twitter-posts/{{ $post->id }}"> Post: {{ $post->id }} </a></h2>
