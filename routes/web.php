@@ -21,3 +21,5 @@ Auth::routes();
 
 Route::get('/redirect/{provider}', 'SocialAuthController@redirect');
 Route::get('/callback/{provider}', 'SocialAuthController@callback');
+
+Route::get('/connected-accounts', 'SocialAccountsController@index');
