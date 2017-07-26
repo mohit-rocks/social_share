@@ -14,6 +14,7 @@
                 </a>
 
                 <ul class="dropdown-menu" role="menu">
+                    <li><a href="/connected-accounts">Connected Accounts</a> </li>
                     <li>
                         <a href="{{ route('logout') }}"
                            onclick="event.preventDefault();

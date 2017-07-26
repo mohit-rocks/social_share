@@ -18,7 +18,7 @@ class SocialAuthController extends Controller
         return Socialite::driver('facebook')->scopes(['publish_actions'])->redirect();
       }
       else {
-        return Socialite::driver($provider)->scopes(['publish_actions'])->redirect();
+        return Socialite::driver($provider)->redirect();
       }
     }
 
